@@ -782,12 +782,27 @@ padding: 0 16px 16px;
     max-width: 100%;
 }
 
+
 /* 活動日の入力欄をスマホ画面に収める */
 #activity-date {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
     display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px;
     font-size: 16px;
+}
+
+/* 活動記録のカード内で横幅を制限する */
+details.collapsible-section .collapsible-content {
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+details.collapsible-section #activity-date {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
