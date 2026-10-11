@@ -8,26 +8,26 @@
 ![Creative Activity Tracker](images/screen.png)
 
 # 主な機能
-・創作活動の記録
+- 創作活動の記録
 
-・経験値（EXP）による成長要素
+- 経験値（EXP）による成長要素
 
-・レベルアップ通知
+- レベルアップ通知
 
-・実績解除と報酬の表示
+- 実績解除と報酬の表示
 
-・目標と締め切り管理
+- 目標と締め切り管理
 
-・活動記録の統計管理
+- 活動記録の統計管理
 
 ## 使用技術
-・HTML
+- HTML
 
-・CSS
+- CSS
 
-・JavaScript
+- JavaScript
 
-・GitHub Pages
+- GitHub Pages
 
 ## 公開ページ
 https://reni219.github.io/creative-activity-tracker/
