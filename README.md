@@ -5,7 +5,7 @@
 創作活動を継続するために、日々の活動を記録し、ゲームのような成長要素を通じてモチベーションを維持することを目的に制作しました。
 
 ## スクリーンショット
-![Creative Activity Tracker](images/images/スクリーンショット 2026-10-11 222708.png)
+![Creative Activity Tracker](images/screen.png)
 
 # 主な機能
 ・創作活動の記録
