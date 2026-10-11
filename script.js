@@ -308,8 +308,9 @@ function checkNewAchievements() {
             const notice = document.createElement("div");
             notice.className = "achievement-notice";
             notice.textContent =
-                `🏆 実績解除！ ${achievement.name} ` +
-                `（報酬：${achievement.reward} EXP）`;
+                `🏆 実績解除！\n${achievement.name}\n` +
+                `報酬：${achievement.reward} EXP`;
+
 
             noticeArea.appendChild(notice);
         }
@@ -475,7 +476,9 @@ function checkLevelUp(levelBefore) {
         const notice = document.createElement("div");
         notice.className = "level-up-notice";
         notice.textContent =
-            `🎉 LEVEL UP！ レベル ${levelBefore} → ${currentLevel} 🎉`;
+            `🎉 LEVEL UP！ 🎉\n` +
+            `レベル ${levelBefore} → ${currentLevel}`;
+
 
         noticeArea.replaceChildren(notice);
     }
