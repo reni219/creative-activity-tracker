@@ -483,6 +483,7 @@ padding: 0 16px 16px;
     text-align: center;
     font-weight: bold;
     animation: achievement-pop 0.35s ease-out;
+    white-space: pre-line;
 }
 
 @keyframes achievement-pop {
@@ -712,6 +713,7 @@ padding: 0 16px 16px;
     box-shadow: 0 4px 14px rgba(180, 130, 20, 0.2);
 
     animation: levelUpAppear 0.7s ease-out;
+    white-space: pre-line;
 }
 
 @keyframes levelUpAppear {
