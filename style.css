@@ -806,3 +806,36 @@ details.collapsible-section #activity-date {
     min-width: 0;
     box-sizing: border-box;
 }
+/* スマホでページ全体の横はみ出しを防ぐ */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 0;
+        padding: 10px;
+    }
+
+    .app-layout,
+    .main-content,
+    details.collapsible-section,
+    .collapsible-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    #activity-date {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+}
