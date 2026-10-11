@@ -745,3 +745,39 @@ padding: 0 16px 16px;
     letter-spacing: 0.03em;
     vertical-align: baseline;
 }
+
+/* ===== スマホ表示の調整 ===== */
+#activity-date {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 10px;
+    }
+
+    section,
+    .collapsible-content {
+        min-width: 0;
+    }
+
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+    }
+}
+
+/* 通知内の改行を表示する */
+.achievement-notice,
+.level-up-notice {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+    box-sizing: border-box;
+    max-width: 100%;
+}
