@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>創作モチベ管理アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+
+   <!-- 左側のメニュー -->
+<nav class="sidebar">
+    <h2>メニュー</h2>
+
+    <button type="button" class="menu-button active" data-page="home">
+        ホーム
+    </button>
+
+    <button type="button" class="menu-button" data-page="goals">
+        目標・計画
+    </button>
+
+    <button type="button" class="menu-button" data-page="activities">
+        活動記録
+    </button>
+
+    <button type="button" class="menu-button" data-page="analytics">
+        分析・統計
+    </button>
+
+    <button type="button" class="menu-button" data-page="achievements">
+        実績
+    </button>
+
+    <button type="button" class="menu-button" data-page="calendar">
+        カレンダー
+    </button>
+
+</nav>
+
+    <!-- 右側の表示エリア -->
+    <main class="main-content">
+    <h1 data-page="home">創作活動記録</h1>
+    <div id="total-activity" data-page="home">
+    <div class="total-card">
+        <p>累計活動日数</p>
+        <p><span id="total-days">0</span> 日</p>
+    </div>
+
+    <div class="total-card">
+        <p>累計活動時間</p>
+        <p><span id="total-minutes">0</span> </p>
+    </div>
+</div>
+<!-- ===== 目標設定 ===== -->
+
+<details class="collapsible-section" data-page="goals" open>
+    <summary>目標設定</summary>
+
+<div class="collapsible-content">
+    <form id="goal-form">
+        <label for="goal-name">目標名</label>
+        <input
+            type="text"
+            id="goal-name"
+            placeholder="例：同人誌を完成させる"
+            required
+        >
+
+        <div class="goal-form-row">
+            <div>
+                <label for="goal-target">目標数量</label>
+                <input
+                    type="number"
+                    id="goal-target"
+                    min="0.01"
+                    step="any"
+                    placeholder="30"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="goal-unit">単位</label>
+                <select id="goal-unit">
+                    <option value="枚">枚</option>
+                    <option value="ページ">ページ</option>
+                    <option value="曲">曲</option>
+                    <option value="個">個</option>
+                    <option value="回">回</option>
+                    <option value="文字">文字</option>
+                    <option value="時間">時間</option>
+                    <option value="custom">任意の単位</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="custom-unit-container" hidden>
+            <label for="goal-custom-unit">任意の単位</label>
+            <input
+                type="text"
+                id="goal-custom-unit"
+                maxlength="20"
+                placeholder="例：シーン"
+            >
+        </div>
+
+        <label for="goal-deadline">締切日時</label>
+        <input
+            type="datetime-local"
+            id="goal-deadline"
+            required
+        >
+
+        <label for="goal-current">現在の進捗</label>
+        <input
+            type="number"
+            id="goal-current"
+            min="0"
+            step="any"
+            value="0"
+            required
+        >
+
+        <div class="goal-form-buttons">
+            <button type="submit" id="goal-submit-btn">目標を追加</button>
+            <button type="button" id="goal-cancel-edit-btn" hidden>
+                編集をキャンセル
+            </button>
+        </div>
+
+        <p id="goal-message" role="status"></p>
+    </form>
+
+    <div id="goals-container">
+        <!-- 登録した目標がここに表示される -->
+    </div>
+</div>
+
+</details>
+    
+<details class="collapsible-section" data-page="home" open>
+    <summary>今日の自分</summary>
+
+    <div class="collapsible-content">
+        <p>今日の創作時間：<span id="today-minutes">0</span></p>
+        <p>
+            称号：
+            <span id="level-title" class="title-badge">はじまりの種</span>
+        </p>
+        <h3>Creator Level <span id="creator-level">1</span></h3>
+        
+        <p>経験値：<span id="current-exp">0 / 4</span> EXP</p>
+
+        <progress id="exp-bar" value="0" max="100"></progress>
+
+        <!-- レベルアップ演出の表示場所 -->
+        <div id="level-up-notices" aria-live="polite"></div>
+
+        <h3>連続活動日数</h3>
+        <p><span id="streak-count">0</span>日</p>
+    </div>
+</details>
+
+
+    <!-- ===== 活動記録 ===== -->
+
+<details class="collapsible-section" data-page="activities" open>
+    <summary>今日の活動を記録</summary>
+
+<div class="collapsible-content">
+    <p>今日も一歩ずつ</p>
+    <p id="creator-message">小さな一歩も、積み重ねれば大きな成果。</p>
+    <label for="activity-date">活動日</label>
+    <input
+        type="date"
+        id="activity-date"
+        required
+    >
+    <label for="genre">ジャンル</label>
+    <select id="genre">
+        <option value="小説">小説</option>
+        <option value="イラスト">イラスト</option>
+        <option value="漫画">漫画</option>
+        <option value="作曲">作曲</option>
+        <option value="動画">動画</option>
+        <option value="ゲーム制作">ゲーム制作</option>
+        <option value="その他">その他</option>
+    </select>
+
+    <label for="hours">活動時間</label>
+    <div class="activity-time-input">
+        <div>
+            <label for="hours">時間</label>
+            <input
+                type="number"
+                id="hours"
+                min="0"
+                step="1"
+                value="0"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="minutes">分</label>
+            <input
+                type="number"
+                id="minutes"
+                min="0"
+                max="59"
+                step="1"
+                value="0"
+                required
+            >
+        </div>
+    </div>
+
+    <label for="memo">今日やったこと</label>
+    <textarea
+        id="memo"
+        placeholder="例：キャラクターの設定を考えた"
+    ></textarea>
+
+    <button id="record-button">活動を記録する</button>
+    <p id="message" role="status"></p>
+</div>
+
+</details>
+
+<!-- ===== 活動サマリー ===== -->
+
+<details class="collapsible-section" data-page="analytics" open>
+    <summary>活動サマリー</summary>
+
+<div class="collapsible-content">
+    <nav id="summary-menu">
+        <button data-period="today">今日</button>
+        <button data-period="month">今月</button>
+        <button data-period="year">今年</button>
+        <button data-period="all">これまで</button>
+    </nav>
+
+    <div id="summary-result">
+        <h3 id="summary-title">今日の活動</h3>
+        <p>活動時間：<span id="summary-minutes">0</span></p>
+        <p>活動日数：<span id="summary-days">0</span>日</p>
+        <p>記録件数：<span id="summary-records">0</span>件</p>
+
+        <h3>この期間の活動記録</h3>
+        <ul id="summary-activity-list"></ul>
+    </div>
+</div>
+
+</details>
+<!-- ===== 活動グラフ ===== -->
+
+<details class="collapsible-section" data-page="analytics" open>
+    <summary>活動グラフ</summary>
+
+<div class="collapsible-content">
+    <nav id="chart-period-menu">
+        <button data-period="week">一週間</button>
+        <button data-period="month">今月</button>
+        <button data-period="year">今年</button>
+        <button data-period="all">これまで</button>
+    </nav>
+
+    <div class="chart-container">
+        <h3>期間ごとの活動時間</h3>
+        <p id="period-chart-description">
+            選択した期間の活動時間を表示するよ。
+        </p>
+        <canvas id="period-chart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h3>ジャンルごとの活動時間</h3>
+        <canvas id="genre-chart"></canvas>
+    </div>
+</div>
+
+</details>
+
+<!-- ===== 創作カレンダー ===== -->
+<details class="collapsible-section" data-page="calendar" open>
+    <summary>創作カレンダー</summary>
+
+    <div class="collapsible-content">
+        <div class="calendar-navigation">
+            <button id="calendar-prev" type="button">前月</button>
+            <h3 id="calendar-month">2026年10月</h3>
+        <button id="calendar-next" type="button">翌月</button>
+    </div>
+
+    <div class="calendar-weekdays">
+        <span>月</span>
+        <span>火</span>
+        <span>水</span>
+        <span>木</span>
+        <span>金</span>
+        <span>土</span>
+        <span>日</span>
+    </div>
+
+    <div id="calendar-days" class="calendar-days"></div>
+
+    <p class="calendar-legend">
+        <span class="calendar-dot"></span>
+        創作した日
+    </p>
+
+    <div id="calendar-details" aria-live="polite">
+        日付を選ぶと活動記録が表示されるよ。
+    </div>
+</details
+
+<!-- ===== 活動履歴 ===== -->
+
+<details class="collapsible-section" data-page="activities" open>
+    <summary>活動履歴</summary>
+
+<div class="collapsible-content">
+    <ul id="activity-list"></ul>
+</div>
+
+</details>
+
+<!-- ===== 実績 ===== -->
+
+<details class="collapsible-section" data-page="achievements" open>
+    <summary>実績</summary>
+
+    <div class="collapsible-content">
+        <p>創作活動の積み重ねで実績を解除しよう！</p>
+
+        <div class="achievement-progress">
+            <p>
+                実績解除率：
+                <span id="achievement-progress-text">0 / 4（0%）</span>
+            </p>
+
+            <progress
+                id="achievement-progress-bar"
+                value="0"
+                max="4"
+            ></progress>
+        </div>
+        <div id="achievement-notices" aria-live="polite"></div>
+        <div id="achievement-list"></div>
+    </div>
+</details>
+
+
+<!-- グラフ描画ライブラリ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- 自分で書いたJavaScript -->
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
